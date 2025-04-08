@@ -718,8 +718,10 @@ void main() {
 
   assert(0, ({ struct {int a; int b;} x[2]={0,1,2,3}; x[0].a; }), "struct {int a; int b;} x[2]={0,1,2,3}; x[0].a;");
   assert(2, ({ struct {int a; int b;} x[2]={0,1,2,3}; x[1].a; }), "struct {int a; int b;} x[2]={0,1,2,3}; x[1].a;");
-  assert(9, ({ struct {int a; int b; int c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a + y.b + y.c; }),
-              "struct {int a; int b; int c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a + y.b + y.c;");
+  assert(0x234, ({ struct {int a; int b; int c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a << 8 | y.b << 4 | y.c; }),
+              "struct {int a; int b; int c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a << 8 | y.b << 4 | y.c;");
+  assert(0x234, ({ struct {char a; int b; char c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a << 8 | y.b << 4 | y.c; }),
+              "struct {char a; int b; char c;} x = {2,3,4}, y = {0,0,0}; y = x; y.a << 8 | y.b << 4 | y.c;");
   assert(2, ({ struct {char a; int b;} x={1,2}, y={0,0}; (y = x).b; }),
               "struct {char a; int b;} x={1,2}, y={0,0}; (y = x).b;");
   assert(6, ({ struct {char a; int b;} x={1,2}, y={0,0}, z={0,0}; z = y = x; z.a + z.b + y.a + y.b; }),
