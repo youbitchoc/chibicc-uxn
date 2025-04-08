@@ -200,6 +200,7 @@ static void gen_binary(Node *node) {
       op(SFT2);
     } else {
       need_ashr_helper = 1;
+      warn_tok(node->tok, "ashr");
       jsi("ashr");
     }
     break;
