@@ -889,19 +889,19 @@ static void emit_text(Program *prog) {
     // Normally we jump to sdiv, but as an optimization, we can jump to
     // sdiv/b_pos or sdiv/b_neg directly if we know the divisor's sign!
     printf("@sdiv\n");
-    printf("    OVR #80 AND ?&b_neg");
-    printf("  &b_pos");
-    printf("    OVR2 POP #80 AND ?&a_neg_b_pos");
+    printf("    OVR #80 AND ?&b_neg\n");
+    printf("  &b_pos\n");
+    printf("    OVR2 POP #80 AND ?&a_neg_b_pos\n");
     // (a / b)
-    printf("    DIV2 JMP2r");
-    printf("  &a_neg_b_pos");
+    printf("    DIV2 JMP2r\n");
+    printf("  &a_neg_b_pos\n");
     // -(-a / b)
     printf("    SWP2 #0000 SWP2 SUB2 SWP2 DIV2 #0000 SWP2 SUB2 JMP2r\n");
-    printf("  &b_neg");
-    printf("    #0000 SWP2 SUB2 OVR2 POP #80 AND ?&a_neg_b_neg");
+    printf("  &b_neg\n");
+    printf("    #0000 SWP2 SUB2 OVR2 POP #80 AND ?&a_neg_b_neg\n");
     // -(a / -b)
     printf("    DIV2 #0000 SWP2 SUB2 JMP2r\n");
-    printf("  &a_neg_b_neg");
+    printf("  &a_neg_b_neg\n");
     // (-a / -b)
     printf("    #0000 ROT2 SUB2 SWP2 DIV2 JMP2r\n");
   }
