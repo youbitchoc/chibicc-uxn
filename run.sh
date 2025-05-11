@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
-emu=uxnemu
-if [ "$1" == "--cli" ]; then emu=uxncli; shift; fi
-FILE=$1
+#!/bin/sh
+
+: "${emu:=uxnemu}"
+
+case "$1" in
+'--cli')	emu=uxncli; shift ;;
+esac
+
+f="$1"
+o="${f%.*}"
 shift
-./compile.sh $FILE > tmp.tal && uxnasm tmp.tal tmp.rom && $emu tmp.rom "$@"
+
+(exec >&2; "${0%/*}"/compile.sh "$f" > "$o".tal && uxnasm "$o".tal "$o".rom) && $emu "$@" "$o".rom
