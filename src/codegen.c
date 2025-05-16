@@ -144,6 +144,7 @@ static void gen_binary(Node *node) {
     op(SUB2);
     lit2(node->lhs->ty->base->size);
     need_sdiv_helper = true;
+    warn_tok(node->tok, "sdiv");
     jsi("sdiv/b_pos"); // size should never be negative
     break;
   case ND_MUL:
@@ -156,6 +157,7 @@ static void gen_binary(Node *node) {
       op(DIV2);
     } else {
       need_sdiv_helper = true;
+      warn_tok(node->tok, "sdiv");
       jsi("sdiv");
     }
     break;
