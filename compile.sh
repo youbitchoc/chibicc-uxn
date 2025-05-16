@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 {
 	while IFS= read -r l; do
 		case "$l" in
